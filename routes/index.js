@@ -22,7 +22,8 @@ router.post('/:userid', (req,res)=>{
 router.get('/:userid', (req,res)=>{
     var arr1 = [];
     var userId = req.params.userid;
-    Msg.find({user:userId}).sort({created_date:-1}).exec((err,info)=>{
+    var lim = req.params.limit || 10;
+    Msg.find({user:userId}).sort({created_date:-1}).limit(lim).exec((err,info)=>{
         for(var i in info){
             arr1.push(info[i].msg)
             console.log(arr1)
